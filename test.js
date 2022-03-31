@@ -146,6 +146,13 @@ describe("Test expect", function() {
 
 
 describe("Test promise", function() {
+  it("can test promise with expect", function() {
+    var prom = new Promise((resolve, reject) => {
+      setTimeout(() => resolve(42), 2000);
+    });
+    expect(prom).to_resolve();
+  });
+
   it("can test promise", function() {
     var prom = Promise.resolve(12);
     expect(prom).to_resolve();
@@ -163,29 +170,24 @@ describe("Test promise", function() {
     // assert(prom, "meh", fail, pass);
   });
 
-  it("can test promise with asser_resolve", function() {
+  it("can test promise with assert_resolve", function() {
     var prom = Promise.resolve(66);
     Taste.assert_resolve(prom);
   });
-/*
-  it("can test promise result", async function() {
+
+  it("can test promise result", function() {
     var prom = Promise.resolve(12);
     expect(prom).to_resolve_with(12);
   });
-  it("can test promise rejection", async function() {
-    var prom = Promise.reject("meh").catch(()=>{});;
-    expect(prom).to_reject();
+
+  it("can test promise rejection", function(pass, fail) {
+    var prom = Promise.reject("meh").then(fail).catch(pass);;
+    // expect(prom).to_reject();
   });
-  it("can test promise rejection error", async function() {
-    var prom = Promise.reject("meh").catch(()=>{});;
-    expect(prom).to_reject_with("ko");
+
+  it("can test promise rejection error", function(pass, fail) {
+    var prom = Promise.reject("meh").then(fail).catch(pass);;
+    // expect(prom).to_reject_with("ko");
   });
-  it("can handle long promise", async function() {
-    var prom = new Promise((resolve, reject) => {
-      setTimeout(() => resolve(42), 2000);
-    });
-    expect(prom).to_reject();
-  });
-*/
 });
 
